@@ -9,7 +9,7 @@ class CarsRemoteDataSourceImpl @Inject constructor(private val carApiService: Ca
     CarsRemoteDataSource {
     override suspend fun getCarList(): List<CarModelDto>? {
         return try {
-             carApiService.getCarModels().Models
+             carApiService.getCarModels().Models.take(12)
         }catch (_: Exception){
             null
         }

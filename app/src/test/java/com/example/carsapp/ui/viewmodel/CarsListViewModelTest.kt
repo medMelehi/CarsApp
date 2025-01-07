@@ -56,5 +56,18 @@ class CarsListViewModelTest {
             )
         }
 
+    @Test
+    fun `fetch cars failure`() =
+        runTest {
+            coEvery { getFordCarsUseCase.execute() } returns listOf()
+            viewModel.getFordCars()
+            advanceUntilIdle()
+            val expectedUiState = CarsListViewModel.CarUiState(carList = listOf(), isLoading = false, isError = true)
+            assertEquals(
+                expectedUiState,
+                viewModel.uiState.value,
+            )
+        }
+
 
 }
